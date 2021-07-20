@@ -1,0 +1,30 @@
+﻿@using IliaskaWebSite.Service
+@using SpaceWeb.EfStuff.Model
+@inject IUserService UserService
+
+@section Style{
+    <link rel="stylesheet" href="/css/Work/WorkPage.css">
+}
+
+<div class="main-main">
+    <div class="main">
+        @if (UserService.IsAdmin())
+        {
+            <div class="text">
+                <span>Add new employee</span>
+                <a href="/User/Registration" class="button"><span>ADD</span></a>
+            </div>
+        }
+        <div class="text">
+            <div class="text-wrapper">
+                <span>Dear employee!</span>
+                <span>Welcome to our team, now you must log in to our site and continue working</span>
+            </div>
+            <a href="/User/Login" class="button" >
+                <span>Login</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+

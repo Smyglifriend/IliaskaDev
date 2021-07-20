@@ -1,0 +1,38 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/Layout.css"/>
+    <link rel="stylesheet" href="~/css/reset.css"/>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+    @RenderSection("Style", false)
+    @RenderSection("Script", false)
+</head>
+<body>
+<div class="top-panel">
+    <a href="/Home/Home" class="text-top-panel-IliaskaDev">
+        <span>:iliaskaDev</span>
+    </a>
+    <div class="text-top-panel">
+        <a href="">Games</a>
+        <a href="">Vacancies</a>
+        <a href="/Shop/Shop">Shop</a>
+        <a href="">Company</a>
+        <a href="">Blog</a>
+        <a href="/WorkPage/WorkPage">Work</a>
+    </div>
+</div>
+<div class="content">
+    @RenderBody()
+</div>
+<div class="footer">
+    <span>Create by Me</span>
+    <div>
+        <span>2021 </span>
+        <span>All Right Reserved</span>
+    </div>
+    <span>Follow us</span>
+</div>
+</body>
+</html>

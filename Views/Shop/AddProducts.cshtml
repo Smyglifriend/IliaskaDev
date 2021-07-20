@@ -1,0 +1,35 @@
+﻿@using IliaskaWebSite.EfStuff.Model
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using System.Collections
+@model AddProductViewModel
+    
+@section Style{
+    <link rel="stylesheet" href="~/css/AddProducts.css">
+}
+<form action="/Shop/AddProducts" method="post">  
+    <div>
+        Name: @Html.TextBoxFor(x => x.Name)
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+    <div>
+        Price: @Html.TextBoxFor(x => x.Price)
+        @Html.ValidationMessageFor(x => x.Price)
+    </div>
+    <div>
+        Amount on repository: @Html.TextBoxFor(x => x.AmountOnRepository)
+        @Html.ValidationMessageFor(x => x.AmountOnRepository)
+    </div>
+    <div>
+        <div>
+            CategoryId: @Html.DropDownList("CategoryId", Model.CategoryOptions)
+            @Html.ValidationMessageFor(x => x.CategoryId)
+        </div>
+    </div>
+    <div>
+        Image URL: @Html.TextBoxFor(x => x.ImageUrl)
+        @Html.ValidationMessageFor(x => x.ImageUrl)
+    </div>
+    <div class="form-group">
+            <button type="submit">Add product</button>
+        </div>
+</form>

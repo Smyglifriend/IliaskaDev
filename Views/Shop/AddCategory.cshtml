@@ -1,0 +1,16 @@
+﻿@using IliaskaWebSite.EfStuff.Model
+@model CategoriesViewModel
+    
+@section Style{
+    <link rel="stylesheet" href="~/css/AddProducts.css">
+}
+
+<form action="/Shop/AddCategory" method="post">  
+    <div>
+        Name: @Html.TextBoxFor(x => x.Category)
+        @Html.ValidationMessageFor(x => x.Category)
+    </div>
+    <div class>
+                <button type="submit">Add product</button>
+            </div>
+</form>

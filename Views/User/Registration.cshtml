@@ -1,0 +1,42 @@
+﻿@using Microsoft.EntityFrameworkCore.Storage.ValueConversion
+@using SpaceWeb.EfStuff.Model
+@model IliaskaWebSite.Models.RegistrationViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+@section Style {
+    
+}
+@section Script
+{
+    
+}
+
+<div class="loginpage">
+    <div class="pglogblock">
+        <div class="pginfo">
+            <div class="pglogin">Registration</div>
+        </div>
+        <form action="/User/Registration" method="post" class="loginformstyle1">
+            <ul class="noBullet">
+                <li>
+                    <label for="username"></label>
+                    <input name="@nameof(RegistrationViewModel.Login)" class="inputFields" type="text" placeholder="Login" />
+                </li>
+                <li>
+                    <label for="password"></label>
+                    <input name="@nameof(RegistrationViewModel.Password)" class="inputFields" type="password" placeholder="Password"/>
+                </li>
+                @Html.DropDownListFor(m => m.JobType, new SelectList(Enum.GetValues(typeof(JobType))), 
+                    "Select specialty")
+                <li>
+                    <input class="pglogbut" type="submit" value="Registration" />
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+

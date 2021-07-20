@@ -1,0 +1,66 @@
+﻿@model List<IliaskaWebSite.EfStuff.Model.Product>
+
+@section Style{
+    <link rel="stylesheet" href="~/css/Shop/Shop.css">
+}
+
+@section Script
+{
+    <script src="~/js/chart.min.js"></script>
+    <script src="~/js/Shop/ShopDropdown.js"></script>
+}
+<div>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <div id="myDropdown" class="dropdown-content">
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+            <a href="">About</a>
+            <a href="">Base</a>
+            <a href="">Blog</a>
+            <a href="">Contact</a>
+            <a href="">Custom</a>
+            <a href="">Support</a>
+            <a href="">Tools</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+<div class="vraper">
+    @foreach (var product in Model)
+    {
+        <div class= "shop-box">
+            <div class="view">
+                 <img src="@product.ImageUrl" alt="">
+                 <div class="box-name-price">
+                     <span class="box-name text">@product.Name</span>
+                     <span class="box-price text">@product.Price $</span>
+                     <span class="box-price text">@product.Category</span>
+                 </div>
+            </div>
+        </div>
+    }
+</div>
+
+
