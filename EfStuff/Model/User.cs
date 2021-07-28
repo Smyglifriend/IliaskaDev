@@ -16,9 +16,11 @@ namespace IliaskaWebSite.EfStuff.Model
         public string Login { get; set; }
         
         public string Password { get; set; }
-        
+
         public int Age { get; set; }
         
         public JobType JobType { get; set; }
+        
+        public string AvatarUrl { get; set; }
     }
 }

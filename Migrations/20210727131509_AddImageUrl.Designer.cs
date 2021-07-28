@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IliaskaWebSite.Migrations
 {
     [DbContext(typeof(IliaskaDbContext))]
-    [Migration("20210717203716_ProductCategories")]
-    partial class ProductCategories
+    [Migration("20210727131509_AddImageUrl")]
+    partial class AddImageUrl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,24 +20,6 @@ namespace IliaskaWebSite.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategory", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Clothes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductCategory");
-                });
 
             modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.Product", b =>
                 {
@@ -49,6 +31,12 @@ namespace IliaskaWebSite.Migrations
                     b.Property<int>("AmountOnRepository")
                         .HasColumnType("int");
 
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -58,12 +46,26 @@ namespace IliaskaWebSite.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("TypeProduct")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategories", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.User", b =>
@@ -75,6 +77,9 @@ namespace IliaskaWebSite.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
@@ -100,6 +105,20 @@ namespace IliaskaWebSite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.Product", b =>
+                {
+                    b.HasOne("IliaskaWebSite.EfStuff.Model.ProductCategories", "Category")
+                        .WithMany("Clothes")
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategories", b =>
+                {
+                    b.Navigation("Clothes");
                 });
 #pragma warning restore 612, 618
         }

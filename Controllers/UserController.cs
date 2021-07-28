@@ -5,6 +5,7 @@ using IliaskaWebSite.EfStuff.Model;
 using IliaskaWebSite.Models;
 using IliaskaWebSite.Service;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SpaceWeb.EfStuff.Repositories;
 
@@ -91,10 +92,35 @@ namespace IliaskaWebSite.Controllers
             return View(model);
         }
         
+        //[Authorize]
+        [HttpGet]
         public IActionResult Profile()
         {
-            var model = new RegistrationViewModel();
+            var user = _userService.GetCurrent();
+            var model = _mapper.Map<ProfileViewModel>(user);
+            
+            if (_userService.Form())
+            {
+                model.NullField = true;
+            }
             return View(model);
+        }
+        
+        [HttpPost]
+        public IActionResult Profile(ProfileViewModel model)
+        {
+            if (_userService.Form())
+            {
+                return RedirectToAction("UserForm");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult UserForm()
+        {
+            
+            return View();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace IliaskaWebSite.Models
 {
     public class AddProductViewModel
     {
-        public AddProductViewModel(List<ProductCategory> categoryNames)
+        public AddProductViewModel(List<ProductCategories> categoryNames)
         {
             CategoryOptions = categoryNames.Select(option => new SelectListItem()
             {
@@ -26,6 +26,7 @@ namespace IliaskaWebSite.Models
             
         }
 
+        public long Id { get; set; }
         public List<SelectListItem> CategoryOptions { get; set; } = new List<SelectListItem>();
 
         [Required(ErrorMessage = "be sure to show the path.")]
@@ -41,5 +42,7 @@ namespace IliaskaWebSite.Models
         public int AmountOnRepository { get; set; }
 
         public string CategoryId { get; set; }
+        
+        public Gender Gender { get; set; }
     }
 }

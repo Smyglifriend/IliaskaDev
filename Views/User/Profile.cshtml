@@ -1,18 +1,26 @@
-﻿@model IliaskaWebSite.Models.RegistrationViewModel
+﻿@model ProfileViewModel
 
 @{
     Layout = "_Layout";
 }
 
 @section Style {
-    
+     <link rel="stylesheet" href="~/css/Profile/Profile.css">
 }
 
 @section Script
 {
     
 }
-
-<div class="loginpage">
-    Hello/ you admine
+<div class="wrapper">
+    @if (Model.NullField == false)
+    {
+        <div class="form">
+            <a href="/User/UserForm">Please, check this</a>
+        </div>
+    }
+    <div class="loginpage">
+        <div>@Model.Name</div>
+        <div>@Model.Login</div>
+    </div>
 </div>

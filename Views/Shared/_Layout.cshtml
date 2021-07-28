@@ -1,11 +1,13 @@
-﻿
+﻿@using IliaskaWebSite.Service
+@inject IUserService UserService
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="~/css/Layout.css"/>
     <link rel="stylesheet" href="~/css/reset.css"/>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    
+
     @RenderSection("Style", false)
     @RenderSection("Script", false)
 </head>
@@ -20,7 +22,18 @@
         <a href="/Shop/Shop">Shop</a>
         <a href="">Company</a>
         <a href="">Blog</a>
-        <a href="/WorkPage/WorkPage">Work</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (UserService.IsAdmin())
+            {
+                <a href="/WorkPage/WorkPage">Work</a>
+            }
+            <a href="/User/Profile">Profile</a>
+        }
+        else
+        {
+            <a href="/WorkPage/WorkPage">Work</a>
+        }
     </div>
 </div>
 <div class="content">

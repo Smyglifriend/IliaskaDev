@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IliaskaWebSite.Migrations
 {
     [DbContext(typeof(IliaskaDbContext))]
-    [Migration("20210713191940_AddProducts")]
-    partial class AddProducts
+    [Migration("20210724203853_AddGender")]
+    partial class AddGender
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,12 @@ namespace IliaskaWebSite.Migrations
                     b.Property<int>("AmountOnRepository")
                         .HasColumnType("int");
 
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -40,12 +46,26 @@ namespace IliaskaWebSite.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("TypeProduct")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategories", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.User", b =>
@@ -82,6 +102,20 @@ namespace IliaskaWebSite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.Product", b =>
+                {
+                    b.HasOne("IliaskaWebSite.EfStuff.Model.ProductCategories", "Category")
+                        .WithMany("Clothes")
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategories", b =>
+                {
+                    b.Navigation("Clothes");
                 });
 #pragma warning restore 612, 618
         }

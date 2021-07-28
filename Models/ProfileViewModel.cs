@@ -4,7 +4,7 @@ using SpaceWeb.EfStuff.Model;
 
 namespace IliaskaWebSite.Models
 {
-    public class UserViewModel
+    public class ProfileViewModel
     {
         public string Name { get; set; }
         
@@ -21,5 +21,7 @@ namespace IliaskaWebSite.Models
         public int Age { get; set; }
         
         public JobType JobType { get; set; }
+        
+        public bool NullField { get; set; }
     }
 }

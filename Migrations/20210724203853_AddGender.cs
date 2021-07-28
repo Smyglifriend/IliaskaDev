@@ -1,25 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using SpaceWeb.EfStuff.Model;
 
 namespace IliaskaWebSite.Migrations
 {
-    public partial class FieldJobType : Migration
+    public partial class AddGender : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "JobType",
-                table: "Users",
+                name: "Gender",
+                table: "Products",
                 type: "int",
                 nullable: false,
-                defaultValue: JobType.OfficeWorker);
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "JobType",
-                table: "Users");
+                name: "Gender",
+                table: "Products");
         }
     }
 }

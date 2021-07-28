@@ -49,7 +49,8 @@ namespace IliaskaWebSite
             services.AddScoped<IUserService>(diContainer =>
                 new UserService(
                     diContainer.GetService<IUserRepository>(),
-                    diContainer.GetService<IHttpContextAccessor>()
+                    diContainer.GetService<IHttpContextAccessor>(),
+                    diContainer.GetService<IMapper>()
                     ));
             
             
@@ -104,8 +105,10 @@ namespace IliaskaWebSite
             MapBoth<User, RegistrationViewModel>(configExpression);
             MapBoth<Product, ProductViewModel>(configExpression);
             MapBoth<Product, AddProductViewModel>(configExpression);
-            MapBoth<ProductCategory, CategoriesViewModel>(configExpression);
-
+            MapBoth<ProductCategories, CategoriesViewModel>(configExpression);
+            MapBoth<ProductViewModel, Product>(configExpression);
+            MapBoth<ProfileViewModel, User>(configExpression);
+            
             var mapperConfiguration = new MapperConfiguration(configExpression);
             var mapper = new Mapper(mapperConfiguration);
             services.AddScoped<IMapper>(c => mapper);

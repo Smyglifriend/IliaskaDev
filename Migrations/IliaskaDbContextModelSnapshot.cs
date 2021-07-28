@@ -19,21 +19,6 @@ namespace IliaskaWebSite.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategory", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductCategory");
-                });
-
             modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.Product", b =>
                 {
                     b.Property<long>("Id")
@@ -47,6 +32,9 @@ namespace IliaskaWebSite.Migrations
                     b.Property<long?>("CategoryId")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -56,14 +44,26 @@ namespace IliaskaWebSite.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("TypeProduct")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategories", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.User", b =>
@@ -75,6 +75,9 @@ namespace IliaskaWebSite.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
+
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
@@ -104,14 +107,14 @@ namespace IliaskaWebSite.Migrations
 
             modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.Product", b =>
                 {
-                    b.HasOne("IliaskaWebSite.EfStuff.Model.ProductCategory", "CategoryId")
+                    b.HasOne("IliaskaWebSite.EfStuff.Model.ProductCategories", "Category")
                         .WithMany("Clothes")
                         .HasForeignKey("CategoryId");
 
-                    b.Navigation("CategoryId");
+                    b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategory", b =>
+            modelBuilder.Entity("IliaskaWebSite.EfStuff.Model.ProductCategories", b =>
                 {
                     b.Navigation("Clothes");
                 });

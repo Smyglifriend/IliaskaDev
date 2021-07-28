@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
+using AutoMapper;
 using IliaskaWebSite.EfStuff.Model;
+using IliaskaWebSite.Models;
 using Microsoft.AspNetCore.Http;
 using SpaceWeb.EfStuff.Model;
 using SpaceWeb.EfStuff.Repositories;
@@ -14,11 +16,13 @@ namespace IliaskaWebSite.Service
     {
         private IUserRepository _userRepository;
         private IHttpContextAccessor _contextAccessor;
+        private IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, IHttpContextAccessor contextAccessor)
+        public UserService(IUserRepository userRepository, IHttpContextAccessor contextAccessor, IMapper mapper)
         {
             _userRepository = userRepository;
             _contextAccessor = contextAccessor;
+            _mapper = mapper;
         }
 
         public User GetCurrent()
@@ -53,6 +57,33 @@ namespace IliaskaWebSite.Service
         {
             var user = GetCurrent();
             return user.JobType == JobType.Admin;
+        }
+        
+        public bool isOfficeWorker()
+        {
+            var user = GetCurrent();
+            return user.JobType == JobType.OfficeWorker;
+        }
+
+        public bool isHR()
+        {
+            var user = GetCurrent();
+            return user.JobType == JobType.HR;
+        }
+
+        public bool Form()
+        {
+            var user = GetCurrent();
+            var model = _mapper.Map<ProfileViewModel>(user);
+            if (model.Age != 0 &&
+                model.Email != null &&
+                model.Name != null &&
+                model.SurName != null)
+            {
+                return true;
+            }
+        
+            return false;
         }
     }
 }

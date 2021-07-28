@@ -11,11 +11,11 @@ namespace IliaskaWebSite.EfStuff
         
         public DbSet<Product> Products { get; set; }
         
-        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductCategories> ProductCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductCategory>()
+            modelBuilder.Entity<ProductCategories>()
                 .HasMany(x => x.Clothes)
                 .WithOne(x => x.Category);
             

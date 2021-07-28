@@ -22,10 +22,9 @@ namespace IliaskaWebSite.Models
         
         [Required(ErrorMessage = "The amount of products may even be 0.")]
         public int AmountOnRepository { get; set; }
-        
-        [Required(ErrorMessage = "You need to specify the type")]
-        public TypeProduct TypeProduct { get; set; }
-        
+
         public string Category { get; set; }
+        
+        public Gender Gender { get; set; }
     }
 }

@@ -12,9 +12,8 @@ namespace IliaskaWebSite.EfStuff.Model
         public double Price { get; set; }
         
         public int AmountOnRepository { get; set; }
+        public virtual ProductCategories Category { get; set; }
         
-        public TypeProduct TypeProduct { get; set; }
-        
-        public virtual ProductCategory Category { get; set; }
+        public Gender Gender { get; set; }
     }
 }

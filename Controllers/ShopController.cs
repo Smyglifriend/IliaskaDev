@@ -31,16 +31,22 @@ namespace IliaskaWebSite.Controllers
         [HttpGet]
         public IActionResult Shop()
         {
-            var model  = _shopRepository.GetAll().ToList();
+            var product = _shopRepository.GetAll();
+            var model  = _mapper.Map<List<ProductViewModel>>(product);
+            
             return View(model);
         }
 
         [HttpGet]
-        public IActionResult AddProducts()
+        public IActionResult AddProducts(long id = 0)
         {
+            //как это оптимизировать, чтобы появились категории
             var category = _categoryRepository
                 .GetAll();
-            var model = new AddProductViewModel(category);
+            var product = _shopRepository.Get(id);
+            var model = _mapper.Map<AddProductViewModel>(product)
+                        ?? new AddProductViewModel(category);
+            
             return View(model);
         }
         
@@ -54,13 +60,22 @@ namespace IliaskaWebSite.Controllers
         
             var category = _categoryRepository
                 .Get(model.CategoryId);
-            
             var product = _mapper.Map<Product>(model);
             product.Category = category;
             _shopRepository.Save(product);
-            return View(model);
+            
+            var categoryList = _categoryRepository
+                .GetAll();
+            var newModelWithCategory = new AddProductViewModel(categoryList);
+            
+            return View(newModelWithCategory);
         }
         
+        public IActionResult Remove(long id)
+        {
+            _shopRepository.Remove(id);
+            return RedirectToAction("Shop");
+        }
         [HttpGet]
         public IActionResult AddCategory()
         {
@@ -71,9 +86,16 @@ namespace IliaskaWebSite.Controllers
         [HttpPost]
         public IActionResult AddCategory(CategoriesViewModel model)
         {
-            var product = _mapper.Map<ProductCategory>(model);
+            var product = _mapper.Map<ProductCategories>(model);
             _categoryRepository.Save(product);
             return View(model);
+        }
+
+        public JsonResult ShopFilter()
+        {
+            
+            
+            return Json(true);
         }
     }
 }

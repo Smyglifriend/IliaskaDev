@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using IliaskaWebSite.EfStuff.Model;
-using IliaskaWebSite.Migrations;
+using ProductCategories = IliaskaWebSite.EfStuff.Model.ProductCategories;
 
 namespace SpaceWeb.EfStuff.Repositories
 {
-    public interface ICategoryRepository: IBaseRepository<ProductCategory>
+    public interface ICategoryRepository: IBaseRepository<ProductCategories>
     {
-        public ProductCategory Get(string data);
-        
+        public ProductCategories Get(string data);
     }
 }

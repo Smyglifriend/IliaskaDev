@@ -1,4 +1,8 @@
-﻿@model List<IliaskaWebSite.EfStuff.Model.Product>
+﻿@using IliaskaWebSite.Service
+@using IliaskaWebSite.EfStuff.Model
+@model List<ProductViewModel>
+
+@inject IUserService UserServicece 
 
 @section Style{
     <link rel="stylesheet" href="~/css/Shop/Shop.css">
@@ -7,57 +11,76 @@
 @section Script
 {
     <script src="~/js/chart.min.js"></script>
-    <script src="~/js/Shop/ShopDropdown.js"></script>
-}
-<div>
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-            <a href="">About</a>
-            <a href="">Base</a>
-            <a href="">Blog</a>
-            <a href="">Contact</a>
-            <a href="">Custom</a>
-            <a href="">Support</a>
-            <a href="">Tools</a>
-        </div>
-    </div>
-</div>
-
-<script>
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
+    <script src="~/js/Shop/ShopDropdown.js"></script>  
+    <script src="~/js/Shop/ProductFiltration.js"></script>
+    
 }
 
-function filterFunction() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown");
-  a = div.getElementsByTagName("a");
-  for (i = 0; i < a.length; i++) {
-    txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
+@if (User.Identity.IsAuthenticated && UserServicece.IsAdmin())
+{
+    <div> Add product </div>
+    <a href="/Shop/AddProducts"> Click</a>
+    <div> Add categoty </div>
+    <a href="/Shop/AddCategory"> Click</a>
+}
+<div class="category">
+    @{
+        var genders = Model
+            .Select(x => x.Gender)
+            .Distinct()
+            .ToList();
     }
-  }
-}
-</script>
-
+    @foreach (var category in genders)
+    {
+        var genderName = "";
+        if (category == Gender.Mens )
+        {
+            genderName = "Mens";
+        }
+        else if (category == Gender.Womens)
+        {
+            genderName = "Womens";
+        }
+        else
+        {
+            genderName = "Kids";
+        }
+        
+        <div class="category-text"
+             data-filter="@genderName"
+             value="@((int) category)">
+            <a href="#">@category.ToString()</a>
+        </div>
+    }
+</div>
 <div class="vraper">
     @foreach (var product in Model)
     {
-        <div class= "shop-box">
+        var genderName = "";
+        if (product.Gender == Gender.Mens)
+        {
+            genderName = "Mens";
+        }
+        else if (product.Gender == Gender.Womens)
+        {
+            genderName = "Womens";
+        }
+        else
+        {
+            genderName = "Kids";
+        }
+        <div class="shop-box" data-cat = "@genderName">
             <div class="view">
-                 <img src="@product.ImageUrl" alt="">
-                 <div class="box-name-price">
-                     <span class="box-name text">@product.Name</span>
-                     <span class="box-price text">@product.Price $</span>
-                     <span class="box-price text">@product.Category</span>
-                 </div>
+                <img src="@product.ImageUrl" alt="">
+                <div class="box-name-price">
+                    <span class="box-name text">@product.Name</span>
+                    <span class="box-price text">@product.Price $</span>
+                </div>
+                @if (User.Identity.IsAuthenticated && UserServicece.IsAdmin())
+                {
+                    <a href="/Shop/AddProducts?id=@product.Id">Change</a>
+                    <a href="/Shop/Remove?id=@product.Id">Remove</a>
+                }
             </div>
         </div>
     }

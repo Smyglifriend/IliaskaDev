@@ -1,5 +1,5 @@
 ﻿.content{
-    background-color: #272723;
+    background-color: #edeff3;
 }
 
 .vraper{
@@ -12,10 +12,14 @@
 .shop-box{
     width: 300px;
     height: 350px;
-    margin-left: 20px;
-    margin-bottom: 30px;
+    margin-left: 30px;
+    margin-bottom: 50px;
     padding: 10px;
-    background-color: #272723;
+    background-color: #edeff3;
+}
+
+.shop-box:hover{
+    background-color: #696960;
 }
 
 .view{
@@ -39,69 +43,45 @@
 
 .text{
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-weight: bold;
     font-size: 20px;
     margin-bottom: 10px;
     margin-left: 20px;
-    color: ghostwhite;
+    color: #811515;
 }
-
-
-
-
-   
-
-
-
-
-.dropbtn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
-
-#myInput {
-    box-sizing: border-box;
-    
-    background-position: 14px 12px;
-    background-repeat: no-repeat;
-    font-size: 16px;
-    padding: 14px 20px 12px 45px;
-    border: none;
-    border-bottom: 1px solid #ddd;
-}
-
-#myInput:focus {outline: 3px solid #ddd;}
-
-.dropdown {
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #272723;
-    min-width: 230px;
-    overflow: auto;
-    border: 1px solid #9c9c7d;
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+.category{
+    display: flex;
+    margin: 10px;
+    padding: 20px;
+    justify-content: space-around;
+}
+
+.category-text{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    border-radius: 20px;
+}
+.category-text:hover{
+    background-color: #696960;
+    cursor: pointer;
+}
+.category-text a{
+    font-size: 20px;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    color: #811515;
+}
+
+.hide{
+    display: none;
+}
+
+
+
+
+
 
 

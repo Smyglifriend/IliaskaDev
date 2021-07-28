@@ -1,0 +1,10 @@
+﻿.form{
+    height: 75px;
+    width: 200px;
+    background-color: red;
+}
+
+.wrapper{
+    display: flex;
+    
+}

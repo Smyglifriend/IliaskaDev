@@ -9,5 +9,10 @@ namespace IliaskaWebSite.Service
         ClaimsPrincipal GetPrincipal(User user);
 
         public bool IsAdmin();
+        public bool isOfficeWorker();
+
+        public bool isHR();
+
+        public bool Form();
     }
 }

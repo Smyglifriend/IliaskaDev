@@ -4,7 +4,7 @@ using SpaceWeb.EfStuff.Model;
 
 namespace IliaskaWebSite.EfStuff.Model
 {
-    public class ProductCategory : BaseModel
+    public class ProductCategories : BaseModel
     {
         public string Category { get; set; } 
         
